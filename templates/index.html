@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <title>Suggestions</title>
+</head>
+
+<body>
+
+<h3> Click button to play note </h3>
+
+<button id="tone1">C4</button>
+<button id="tone2">B3</button>
+<button id="tone3">A3</button>
+<button id="tone4">G3</button>
+<button id="tone5">F3</button>
+<button id="tone6">E3</button>
+<button id="tone7">D3</button>
+<button id="tone8">C3</button>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://unpkg.com/tone"></script>
+
+<script>
+
+const synth = new Tone.Synth().toMaster();
+
+function play_note(button_number){
+    $.ajax({
+      url: "/tone",
+      type: "get",
+      data: {button_number: button_number},
+      success: function(response) {
+          console.log(response);
+          synth.triggerAttackRelease(response, "8n");
+      }
+    });
+}
+
+document.getElementById("tone1").addEventListener("click", function(){ play_note(1); });
+document.getElementById("tone2").addEventListener("click", function(){ play_note(2); });
+document.getElementById("tone3").addEventListener("click", function(){ play_note(3); });
+document.getElementById("tone4").addEventListener("click", function(){ play_note(4); });
+document.getElementById("tone5").addEventListener("click", function(){ play_note(5); });
+document.getElementById("tone6").addEventListener("click", function(){ play_note(6); });
+document.getElementById("tone7").addEventListener("click", function(){ play_note(7); });
+document.getElementById("tone8").addEventListener("click", function(){ play_note(8); });
+
+</script>
+
+</body>
+
+</html>
